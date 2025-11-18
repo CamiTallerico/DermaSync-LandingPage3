@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DermaSync | Dermatología Corporativa para Profesionales</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Estilos embebidos -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #2951d8;
+            --primary-hover: #1d3cb0;
+            --text-dark: #1a1a1a;
+            --text-light: #666;
+            --bg-light: #f8f9fa;
+            --white: #ffffff;
+            --gray-border: #e5e7eb;
+            --success-green: #10b981;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            font-size: 16px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .nav-links {
+            display: none;
+        }
+
+        /* Login Button */
+        .login-btn {
+            background: var(--primary-blue);
+            color: var(--white);
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .login-btn:hover {
+            background: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 60px;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, #3a6af0 100%);
+            color: var(--white);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-content {
+            text-align: center;
+        }
+
+        .hero-logo {
+            font-size: 72px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        .hero h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .hero-image {
+            width: 100%;
+            max-width: 500px;
+            height: 300px;
+            background: url('https://placehold.co/500x300/ffffff/2951d8?text=DermaSync+IA') center/cover;
+            margin: 30px auto 0;
+            border-radius: 10px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-height: 44px;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--white);
+            color: var(--primary-blue);
+        }
+
+        .btn-primary:hover {
+            background: var(--bg-light);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+            margin-left: 10px;
+        }
+
+        .btn-secondary:hover {
+            background: var(--white);
+            color: var(--primary-blue);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 60px 0;
+            background: var(--bg-light);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 40px;
+            color: var(--text-dark);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .service-icon {
+            font-size: 48px;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 60px 0;
+            background: var(--bg-light);
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 24px;
+            margin-right: 20px;
+        }
+
+        .testimonial-info h4 {
+            color: var(--text-dark);
+            margin-bottom: 5px;
+        }
+
+        .testimonial-info p {
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        .testimonial-quote {
+            font-style: italic;
+            color: var(--text-dark);
+            line-height: 1.8;
+            margin-bottom: 20px;
+            padding-left: 20px;
+            border-left: 3px solid var(--primary-blue);
+        }
+
+        .testimonial-results {
+            background: var(--success-green);
+            color: var(--white);
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .testimonial-results h5 {
+            margin-bottom: 10px;
+        }
+
+        .testimonial-results ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .testimonial-results li {
+            margin-bottom: 5px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .testimonial-results li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 60px 0;
+            background: var(--white);
+        }
+
+        .faq-item {
+            background: var(--bg-light);
+            margin-bottom: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--text-dark);
+            transition: background 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: var(--gray-border);
+        }
+
+        .faq-question i {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-question.active i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-answer.active {
+            padding: 20px;
+            max-height: 500px;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 60px 0;
+            background: var(--bg-light);
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid var(--gray-border);
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .social-links {
+            margin-bottom: 20px;
+        }
+
+        .social-links a {
+            color: var(--white);
+            font-size: 24px;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: block;
+            font-size: 24px;
+            color: var(--primary-blue);
+            cursor: pointer;
+        }
+
+        /* Tablet y Desktop Styles */
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+                list-style: none;
+                gap: 30px;
+            }
+
+            .nav-links a {
+                text-decoration: none;
+                color: var(--text-dark);
+                font-weight: 500;
+                transition: color 0.3s ease;
+            }
+
+            .nav-links a:hover {
+                color: var(--primary-blue);
+            }
+
+            .mobile-menu {
+                display: none;
+            }
+
+            .hero-logo {
+                font-size: 96px;
+            }
+
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .hero p {
+                font-size: 20px;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero-content {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+                align-items: center;
+                text-align: left;
+            }
+
+            .hero-image {
+                margin: 0;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .services-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .section-title {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">DermaSync</div>
+            <ul class="nav-links">
+                <li><a href="#services">Servicios</a></li>
+                <li><a href="#testimonials">Testimonios</a></li>
+                <li><a href="#faq">Preguntas</a></li>
+                <li><a href="#contact">Contacto</a></li>
+                <li><a href="#login" class="login-btn">Login</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div style="text-align: center; width: 100%;">
+                    <div class="hero-logo">DermaSync</div>
+                    <h1>Tu consulta, más ágil. Diseñado para dermatólogos.</h1>
+                    <p>Reduce un 40% el tiempo de diagnóstico. Análisis instantáneo con IA, archivos organizados y mayor precisión en cada caso.</p>
+                    <div>
+                        <a href="#contact" class="btn btn-primary">Solicitar Demo Gratis</a>
+                        <a href="#services" class="btn btn-secondary">Ver Características</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Tu consulta, más ágil. Diseñado para dermatólogos.</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Análisis con IA</h3>
+                    <p>Pre-diagnóstico instantáneo que acelera tu evaluación sin reemplazar tu expertise.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-folder-organized"></i>
+                    </div>
+                    <h3>Archivos Organizados</h3>
+                    <p>Todos los casos, fotos y notas en un sistema seguro y accesible desde cualquier dispositivo.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>40% Más Rápido</h3>
+                    <p>Reduce de 20-30 minutos a solo 12-15 minutos por caso con nuestra tecnología assistida.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-shield-virus"></i>
+                    </div>
+                    <h3>Seguridad Médica</h3>
+                    <p>Cumplimiento HIPAA, encriptación de grado militar y respaldo automático en la nube.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2 class="section-title">Lo que Dicen Nuestros Colegas</h2>
+            
+            <!-- Clínica DermaVida Case -->
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="testimonial-avatar">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <div class="testimonial-info">
+                        <h4>Dr. Carlos Méndez</h4>
+                        <p>Dermatólogo - Clínica DermaVida, Buenos Aires</p>
+                    </div>
+                </div>
+                
+                <div class="testimonial-quote">
+                    "DermaSync no reemplaza mi experiencia — la acelera. Antes tardaba 20-30 minutos por caso revisando fotos en WhatsApp, email y papel. Ahora subo las imágenes y obtengo un pre-análisis instantáneo con IA que me organiza todo el expediente."
+                </div>
+                
+                <div class="testimonial-results">
+                    <h5>Resultados después de 2 meses:</h5>
+                    <ul>
+                        <li>40% más rápido en diagnóstico</li>
+                        <li>Archivos de casos organizados</li>
+                        <li>Mayor satisfacción profesional</li>
+                        <li>Mejor consistencia entre casos</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Additional Testimonials -->
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="testimonial-avatar">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <div class="testimonial-info">
+                        <h4>Dra. Laura Sánchez</h4>
+                        <p>Dermatólogo - Centro Médico Nacional, Madrid</p>
+                    </div>
+                </div>
+                
+                <div class="testimonial-quote">
+                    "La precisión del análisis con IA me ha sorprendido. Me ayuda a identificar patrones que a veces pasan desapercibidos en una revisión manual. Mis pacientes notan la diferencia en la calidad del diagnóstico."
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="testimonial-avatar">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <div class="testimonial-info">
+                        <h4>Dr. Roberto Lima</h4>
+                        <p>Dermatólogo - Hospital São Paulo</p>
+                    </div>
+                </div>
+                
+                <div class="testimonial-quote">
+                    "Puedo atender al 50% más pacientes sin sacrificar calidad. La organización de archivos me permite revisar historiales en segundos y hacer seguimientos mucho más eficientes."
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq">
+        <div class="container">
+            <h2 class="section-title">Preguntas Frecuentes para Dermatólogos</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>¿Cómo funciona exactamente el análisis con IA?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Nuestro sistema IA analiza patrones visuales en las fotos de lesiones cutáneas y proporciona un pre-diagnóstico con 95% de precisión. Usted mantiene el control final: revisa, ajusta y confirma el diagnóstico. La IA es una herramienta de apoyo, no un reemplazo de su expertise.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>¿Es seguro almacenar información de pacientes?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Absolutamente. Cumplimos con HIPAA y GDPR. Todos los datos se encriptan con AES-256, tenemos respaldo automático en múltiples servidores y nunca compartimos información con terceros. Usted controla completamente quién accede a cada caso.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>¿Cuánto tiempo toma implementar DermaSync en mi consulta?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>La implementación toma menos de 24 horas. Nuestro equipo de soporte le guía en la migración de archivos existentes, configura su cuenta personalizada y le proporciona capacitación en línea de 30 minutos. Puede empezar a usarlo el mismo día.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>¿Funciona sin conexión a internet?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Sí, tiene modo offline. Puede capturar fotos y hacer anotaciones que se sincronizarán automáticamente cuando recupere conexión. El análisis con IA requiere conexión, pero puede trabajar sin interrupciones en cualquier lugar.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>¿Cuál es el costo y hay contrato forzoso?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Planes desde $99/mes por consultorio. Sin contratos forzosos: puede cancelar en cualquier momento. Ofrecemos 30 días de prueba gratuita sin tarjeta de crédito. Incluye soporte técnico 24/7, actualizaciones gratuitas y capacitación continua.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Modal (Hidden by default) -->
+    <div id="login-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000;">
+        <div style="background: white; padding: 40px; border-radius: 10px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); max-width: 400px; width: 90%;">
+            <h3 style="margin-bottom: 20px; color: var(--primary-blue);">Login para Dermatólogos</h3>
+            <form>
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" name="login-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Contraseña</label>
+                    <input type="password" id="login-password" name="login-password" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-bottom: 10px;">Ingresar</button>
+                <button type="button" onclick="closeLogin()" class="btn" style="width: 100%; background: var(--gray-border); color: var(--text-dark);">Cancelar</button>
+            </form>
+            <p style="margin-top: 15px; text-align: center; font-size: 14px;">
+                <a href="#" style="color: var(--primary-blue);">¿Olvidaste tu contraseña?</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Empieza Tu Prueba Gratis de 30 Días</h2>
+            <form class="contact-form" action="https://formspree.io/f/xgvrgjrz" method="POST">
+                <div class="form-group">
+                    <label for="name">Nombre</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Profesional</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="company">Centro Médico/Consultorio</label>
+                    <input type="text" id="company" name="company" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">¿En qué podemos ayudarle?</label>
+                    <textarea id="message" name="message" placeholder="Cuéntenos sobre su consulta actual y cómo DermaSync podría mejorar su flujo de trabajo..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Solicitar Demo Personalizada</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+            <p>&copy; 2024 DermaSync. Todos los derechos reservados.</p>
+            <p> dermatología con IA | diagnóstico acelerado | seguridad médica</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const answer = this.nextElementSibling;
+                const isActive = this.classList.contains('active');
+                
+                // Close all FAQ items
+                document.querySelectorAll('.faq-question').forEach(q => q.classList.remove('active'));
+                document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('active'));
+                
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    this.classList.add('active');
+                    answer.classList.add('active');
+                }
+            });
+        });
+
+        // Login Modal Functions
+        function openLogin() {
+            document.getElementById('login-modal').style.display = 'block';
+        }
+
+        function closeLogin() {
+            document.getElementById('login-modal').style.display = 'none';
+        }
+
+        // Add login button functionality
+        document.querySelector('.login-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            openLogin();
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('login-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeLogin();
+            }
+        });
+    </script>
+</body>
+</html>
